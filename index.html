@@ -9,6 +9,14 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
+  <meta name="theme-color" content="#0f1419">
+  <meta name="description" content="BrandStudios.AI — The Creative Operating System, Powered by Human Intelligence">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BrandStudios.AI">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+
   <style>
     :root {
       --navy: #0f1419;
@@ -1292,6 +1300,14 @@
       </p>
     </div>
   </section>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
 
 </body>
 
