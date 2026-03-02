@@ -68,7 +68,7 @@
       -webkit-backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
-      justify-content: flex-start
+      justify-content: space-between
     }
 
     .logo {
@@ -79,6 +79,148 @@
     }
 
     .logo span {
+      color: var(--orange)
+    }
+
+    /* ── Navigation HUD ── */
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    .nav-dropdown {
+      position: relative
+    }
+
+    .nav-dropdown-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      font-family: var(--sans);
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background .2s
+    }
+
+    .nav-dropdown-btn:hover {
+      background: rgba(15, 20, 25, .06)
+    }
+
+    .nav-dropdown-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform .2s
+    }
+
+    .nav-dropdown:hover .nav-dropdown-btn svg {
+      transform: rotate(180deg)
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 280px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .12), 0 2px 8px rgba(0, 0, 0, .06);
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s, visibility .2s;
+      max-height: 70vh;
+      overflow-y: auto;
+      z-index: 1001
+    }
+
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .nav-menu-section {
+      padding: 4px 0
+    }
+
+    .nav-menu-label {
+      display: block;
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-light);
+      padding: 8px 12px 4px
+    }
+
+    .nav-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: .82rem;
+      font-weight: 500;
+      transition: background .15s
+    }
+
+    .nav-menu-item:hover {
+      background: rgba(15, 20, 25, .05)
+    }
+
+    .nav-menu-num {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--text-light);
+      min-width: 20px
+    }
+
+    .nav-menu-title {
+      flex: 1
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center
+    }
+
+    .nav-hud-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: #fff;
+      font-family: var(--sans);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 2px 8px rgba(15, 20, 25, .25)
+    }
+
+    .nav-hud-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(15, 20, 25, .35)
+    }
+
+    .nav-hud-btn svg {
+      width: 14px;
+      height: 14px
+    }
+
+    .nav-hud-btn span {
       color: var(--orange)
     }
 
@@ -661,6 +803,17 @@
       }
     }
 
+    @media(max-width:600px) {
+      .nav-center {
+        display: none
+      }
+
+      .nav-hud-btn {
+        font-size: .7rem;
+        padding: 6px 14px
+      }
+    }
+
     @media(max-width:768px) {
       .slide {
         padding: 60px 24px
@@ -682,6 +835,47 @@
 <body>
   <header>
     <div class="logo">BrandStudios<span>.AI</span></div>
+
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Navigate Slides
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <div class="nav-menu-section">
+            <span class="nav-menu-label">Presentation</span>
+            <a href="#title" class="nav-menu-item"><span class="nav-menu-num">01</span><span class="nav-menu-title">The Creative Operating System</span></a>
+            <a href="#what-gets-made" class="nav-menu-item"><span class="nav-menu-num">02</span><span class="nav-menu-title">What Gets Made</span></a>
+            <a href="#difference" class="nav-menu-item"><span class="nav-menu-num">03</span><span class="nav-menu-title">The Difference That Matters</span></a>
+            <a href="#the-system" class="nav-menu-item"><span class="nav-menu-num">04</span><span class="nav-menu-title">The System</span></a>
+            <a href="#market-problem" class="nav-menu-item"><span class="nav-menu-num">05</span><span class="nav-menu-title">The Market Problem</span></a>
+            <a href="#proof-examples" class="nav-menu-item"><span class="nav-menu-num">06</span><span class="nav-menu-title">Proof</span></a>
+            <a href="#brand-fidelity" class="nav-menu-item"><span class="nav-menu-num">07</span><span class="nav-menu-title">Brand Fidelity</span></a>
+            <a href="#human-judgment" class="nav-menu-item"><span class="nav-menu-num">08</span><span class="nav-menu-title">Human Judgment, Operationalized</span></a>
+            <a href="#performance-signals" class="nav-menu-item"><span class="nav-menu-num">09</span><span class="nav-menu-title">Performance Signals</span></a>
+            <a href="#enterprise-impact" class="nav-menu-item"><span class="nav-menu-num">10</span><span class="nav-menu-title">Proof → Enterprise Impact</span></a>
+            <a href="#who-for" class="nav-menu-item"><span class="nav-menu-num">11</span><span class="nav-menu-title">Who This Is For</span></a>
+            <a href="#end-state" class="nav-menu-item"><span class="nav-menu-num">12</span><span class="nav-menu-title">The End State</span></a>
+            <a href="#close" class="nav-menu-item"><span class="nav-menu-num">13</span><span class="nav-menu-title">Close</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <a href="https://brandstudiosai-pre-viz.vercel.app/" target="_blank" class="nav-hud-btn">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+          <rect x="1" y="1" width="6" height="6" rx="1"></rect>
+          <rect x="9" y="1" width="6" height="6" rx="1"></rect>
+          <rect x="1" y="9" width="6" height="6" rx="1"></rect>
+          <rect x="9" y="9" width="6" height="6" rx="1"></rect>
+        </svg>
+        OS <span>HUD</span>
+      </a>
+    </div>
   </header>
 
   <!-- 01 — Definition (PAGE 1) -->
