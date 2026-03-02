@@ -1,4 +1,4 @@
-const CACHE_NAME = 'brandstudios-pwa-v1';
+const CACHE_NAME = 'brandstudios-pwa-v2';
 
 const PRECACHE_URLS = [
   '/',
@@ -55,24 +55,32 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Cache-first for same-origin assets
+  // Network-first for navigation (HTML pages)
+  if (url.origin === self.location.origin && event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
+  // Cache-first for other same-origin assets (images, icons, manifest)
   if (url.origin === self.location.origin) {
     event.respondWith(
       caches.match(event.request).then(cached => {
         if (cached) return cached;
         return fetch(event.request).then(response => {
-          // Cache successful GET responses
           if (response.ok && event.request.method === 'GET') {
             const clone = response.clone();
             caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
           }
           return response;
         });
-      }).catch(() => {
-        // Offline fallback for navigation requests
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
-        }
       })
     );
     return;
